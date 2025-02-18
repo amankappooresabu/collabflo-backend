@@ -2,6 +2,7 @@ import { Socket } from "socket.io"
 
 type SocketId = string
 
+
 enum SocketEvent {
     JOIN_REQUEST = "join-request",
     JOIN_ACCEPTED = "join-accepted",
