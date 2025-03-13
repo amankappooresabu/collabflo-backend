@@ -28,10 +28,10 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: '*',  // WARNING: Only do this in development!
   credentials: true,
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"]
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 };
 
 app.use(cors(corsOptions));
@@ -456,7 +456,9 @@ socket.on(SocketEvent.FILE_UPDATED, async ({ fileId, content, fileName }) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || '3000', 10);
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`Access locally: http://localhost:${PORT}`);
+  console.log(`Access from network: http://172.20.10.0:${PORT}`);
 });
